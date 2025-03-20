@@ -1,0 +1,27 @@
+消融：
+test_wo_graph_learning_custom_ftM_sl96_pl96_test_0  
+mse:0.22577247023582458, mae:0.2760946452617645
+
+test_wo_global_embedding_custom_ftM_sl96_pl96_test_0  
+mse:0.2073184996843338, mae:0.26227134466171265
+
+你的模型 
+mse:0.19078558683395386, mae:0.26370471715927124
+
+对比：
+Autoformer_custom_ftM_sl96_pl96_0  
+mse:0.513717770576477, mae:0.5086374282836914
+
+GRU_custom_ftM_sl96_pl96_0  
+mse:0.3275458514690399, mae:0.3533562123775482
+
+CNN1D_custom_ftM_sl96_pl96_0  
+mse:0.27159422636032104, mae:0.36406442523002625
+
+DLinear_custom_ftM_sl96_pl96_0  
+mse:0.2898843288421631, mae:0.3775608539581299
+
+Transformer_custom_ftM_sl96_pl96_0  
+mse:0.251338392496109, mae:0.2814837694168091
+
+
