@@ -1,24 +1,90 @@
-目录解释：
-1.数据目录：
-data: 存放数据集
-result: 存放实验结果（三维npy文件，维度是【样本，预测长度，预测通道数】
-checkpoints: 存放保存下来的模型
-test_results:预测和真实结果图（这个是程序自动生成的图， 其他图需要根据结果灵活生成）
-2.代码目录：
-models: 存放模型
-layers: 存放模型中的一些神经网络层
-utils: 存放工具函数
-exp: 存放实验流程的函数
-run.py: 主程序入口
-requirements.txt: 依赖包列表
+G-GraphTST is a novel Global-Embedding Graph-Encoder Time Series Transformer designed for multivariate long-term photovoltaic power forecasting. Our model addresses the limitations of existing methods by effectively modeling spatiotemporal correlations at different perceptual levels and incorporating interactive learning between spatial and temporal dependencies.
+🌟 Key Features
 
-实验流程
-1. 数据预处理：
-清洗数据，使数据变成能正确输入程序的形式
-划分数据集，对数据进行归一化，并进行时间序列滑窗
-滑窗是时序预测的基础，具体原理可以参考 https://blog.csdn.net/Stanford_sun/article/details/134675309
-滑窗后的数据通过dataloader进入模型中
-2. 对比实验
-和其他模型作对比，验证自己模型的效果
-3. 消融实验
-去除创新点，效果下降，则证明该创新点有效
+Global Embedding Mechanism: Captures periodicity and trends of the entire multi-node photovoltaic system
+Dynamic Graph Construction: Real-time adaptive generation of adjacency matrices based on node embedding similarity
+Spatiotemporal Fusion: Interactive learning framework combining spatial and temporal modules
+Superior Performance: Outperforms state-of-the-art methods on multiple benchmark datasets
+Strong Generalizability: Applicable to various time series forecasting domains beyond photovoltaic systems
+
+🚀 Quick Start
+Installation
+bash# Clone the repository
+git clone https://github.com/username/G_GraphTST.git
+cd G_GraphTST
+
+# Create virtual environment
+conda create -n g_graphtst python=3.8
+conda activate g_graphtst
+
+# Install dependencies
+pip install -r requirements.txt
+Basic Usage
+bash# Run G-GraphTST on Solar dataset
+python run.py --model GraphPatchTST --data solar --seq_len 96 --pred_len 96 --batch_size 16
+
+# Run on ETT dataset with custom parameters
+python run.py --model GraphPatchTST --data ETTh1 --seq_len 96 --pred_len 96 --d_model 512 --n_heads 8
+📁 Project Structure
+G_GraphTST/
+│
+├── 📂 data/                    # Datasets storage
+│   ├── solar.csv              # Solar power dataset
+│   ├── ETTh1.csv              # Electricity Transformer Temperature dataset
+│   └── ...                    # Other benchmark datasets
+│
+├── 📂 results/                 # Experimental results
+│   ├── loss.npy              # Training loss curves (3D array: [samples, pred_len, channels])
+│   ├── metrics.npy           # Performance metrics (MAE, MSE, RMSE, MAPE, MSPE, R²)
+│   └── ...                    # Model-specific results
+│
+├── 📂 checkpoints/            # Saved model checkpoints
+│   └── model_best.pth        # Best performing model weights
+│
+├── 📂 test_results/           # Prediction visualization (auto-generated)
+│   ├── prediction_curves.pdf # Prediction vs ground truth plots
+│   └── ...                    # Additional visualization files
+│
+├── 📂 models/                 # Model implementations
+│   ├── GraphPatchTST.py      # Main G-GraphTST model
+│   ├── baselines/            # Baseline model implementations
+│   └── ...                    # Other model variants
+│
+├── 📂 layers/                 # Neural network layer components
+│   ├── Transformer_EncDec.py # Transformer encoder-decoder layers
+│   ├── SelfAttention_Family.py # Multi-head attention mechanisms
+│   ├── Embed.py              # Embedding layers (patch, positional, temporal)
+│   └── ...                    # Additional layer implementations
+│
+├── 📂 utils/                  # Utility functions
+│   ├── tools.py              # General utilities (early stopping, learning rate adjustment)
+│   ├── metrics.py            # Evaluation metrics calculation
+│   ├── timefeatures.py       # Time feature engineering
+│   └── ...                    # Other helper functions
+│
+├── 📂 exp/                    # Experiment workflow
+│   ├── exp_basic.py          # Base experiment class
+│   ├── exp_long_term_forecasting.py # Long-term forecasting experiments
+│   └── ...                    # Other experiment types
+│
+├── 📄 run.py                  # Main program entry point
+├── 📄 requirements.txt       # Python dependencies
+├── 📄 README.md              # This file
+└── 📄 LICENSE                # License information
+🔧 Data Processing Pipeline
+1. Data Preprocessing
+Our preprocessing pipeline ensures data compatibility and optimal model performance:
+
+Data Cleaning: Remove inconsistencies and handle missing values
+Normalization: Apply statistical normalization for stable training
+Dataset Splitting: Chronological split (70% train, 10% validation, 20% test)
+
+2. Sliding Window Operation
+Time series forecasting relies on sliding window preprocessing:
+python# Example sliding window configuration
+seq_len = 96      # Input sequence length (96 time steps)
+pred_len = 96     # Prediction sequence length (96 time steps) 
+stride = 1        # Sliding window stride
+For detailed sliding window principles, refer to: Time Series Sliding Window Guide
+3. Data Loading
+Processed data flows through PyTorch DataLoader for efficient batch processing and model training.
