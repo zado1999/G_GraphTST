@@ -86,5 +86,38 @@ seq_len = 96      # Input sequence length (96 time steps)
 pred_len = 96     # Prediction sequence length (96 time steps) 
 stride = 1        # Sliding window stride
 For detailed sliding window principles, refer to: Time Series Sliding Window Guide
+
 3. Data Loading
 Processed data flows through PyTorch DataLoader for efficient batch processing and model training.
+Primary Datasets
+Solar Energy Dataset 🌞
+Source: NREL Solar Power Data for Integration Studies
+Link: http://www.nrel.gov/grid/solar-power-data.html
+Description: Solar power production records from 137 PV plants in Alabama State (2006)
+Sampling: 10 minutes, 52,560 time steps
+ETT (Electricity Transformer Temperature) ⚡
+Source: ETT Dataset Repository
+Link: https://github.com/zhouhaoyi/ETDataset
+Variants: ETTh1, ETTh2 (hourly), ETTm1, ETTm2 (15-minute)
+Description: Electricity transformer temperature and load data
+PV Live Dataset 🔋
+Source: Sheffield Solar PV Live
+Link: https://www.solar.sheffield.ac.uk/pvlive/
+Description: Real-time PV generation data (July 2024 - July 2025)
+Sampling: 30 minutes
+Benchmark Datasets
+Electricity Load Diagrams 💡
+Source: UCI Machine Learning Repository
+Link: https://archive.ics.uci.edu/ml/datasets/ElectricityLoadDiagrams20112014
+Description: Electricity consumption of 321 clients (2012-2014)
+Sampling: 15 minutes → converted to hourly
+Traffic Dataset 🚗
+Source: CalTrans Performance Measurement System (PeMS)
+Link: http://pems.dot.ca.gov
+Description: Road occupancy rates from San Francisco Bay area sensors
+Variables: 862 sensors, hourly sampling
+Exchange Rate Dataset 💱
+Source: Multivariate Time Series Data Repository
+Link: https://github.com/laiguokun/multivariate-time-series-data
+Description: Daily exchange rates of 8 countries (1990-2016)
+Countries: Australia, Britain, Canada, Switzerland, China, Japan, New Zealand, Singapore
